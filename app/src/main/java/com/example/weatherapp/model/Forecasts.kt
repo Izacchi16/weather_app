@@ -1,13 +1,8 @@
 package com.example.weatherapp.model
 
-import java.time.LocalDateTime
-
 data class Forecasts(
-    val data: LocalDateTime,
+    val date: String,
     val dateLabel: String,
     val telop: String,
-    val detail: WeatherDetail,
-    val temperature: Temperature,
-    val chanceOfRain: ChanceOfRain,
-    val Image: Image
+    val detail: Detail
 )
