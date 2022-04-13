@@ -1,16 +1,16 @@
 package com.example.weatherapp.api
 
-import java.util.concurrent.TimeUnit
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiClient {
     // Clientを作成
     private val httpBuilder: OkHttpClient.Builder
         get() {
-            // httpClinetのBuilderを作る
+            // httpClientのBuilderを作る
             val httpClient = OkHttpClient.Builder()
             // create http client　headerの追加
             httpClient.addInterceptor(
@@ -23,8 +23,7 @@ class ApiClient {
 
                     return@Interceptor chain.proceed(request)
                 }
-            )
-                .readTimeout(30, TimeUnit.SECONDS)
+            ).readTimeout(30, TimeUnit.SECONDS)
 
             return httpClient
         }

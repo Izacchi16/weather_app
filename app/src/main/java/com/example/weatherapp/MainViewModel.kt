@@ -1,6 +1,5 @@
 package com.example.weatherapp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,6 @@ class MainViewModel : ViewModel() {
             _weatherInfo.value = result
         } catch (throwable: Throwable) {
             _errorHandler.postValue(Unit)
-            Log.d("izacchi", throwable.toString())
         }
     }
 }

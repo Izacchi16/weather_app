@@ -1,6 +1,5 @@
 package com.example.weatherapp.repository
 
-import android.util.Log
 import com.example.weatherapp.api.ApiClient
 import com.example.weatherapp.model.WeatherModel
 import retrofit2.Call
@@ -18,13 +17,11 @@ class WeatherRepository {
                 response: Response<WeatherModel>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("izacchi", response.body().toString())
                     response.body()?.let { dataList.add(it) }
                 }
             }
 
             override fun onFailure(call: Call<WeatherModel>, t: Throwable) {
-                Log.d("izacchi", t.toString())
             }
         })
 
