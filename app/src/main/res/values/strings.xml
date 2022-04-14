@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
+    <string name="app_name">お天気予報</string>
+
+    <!--地域ID-->
+    <string name="area_id_tokyo">130010</string>
+    <string name="area_id_otsu">250010</string>
 </resources>

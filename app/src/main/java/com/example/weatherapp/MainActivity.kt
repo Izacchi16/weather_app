@@ -11,14 +11,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO: これは良く無い
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
             this,
             R.layout.activity_main
-        )
+        ).also {
+            it.lifecycleOwner = this
+            it.viewModel = viewModel
+        }
 
-        viewModel.onCreate()
+        viewModel.onCreate(getString(R.string.area_id_tokyo))
 
         viewModel.weatherInfo.observe(this) {
             Snackbar.make(binding.root, "success", Snackbar.LENGTH_SHORT).show()

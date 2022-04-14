@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.model.WeatherModel
@@ -14,19 +15,26 @@ class MainViewModel : ViewModel() {
     private val _errorHandler = MutableLiveData<Unit>()
     val errorHandler: LiveData<Unit> = _errorHandler
 
-    private val _weatherInfo = MutableLiveData<List<WeatherModel>>()
-    val weatherInfo: LiveData<List<WeatherModel>> = _weatherInfo
+    private val _weatherInfo = MutableLiveData<List<WeatherModel?>>()
+    val weatherInfo: LiveData<List<WeatherModel?>> = _weatherInfo
 
-    fun onCreate() {
-        fetchWeatherInfo()
+    private var cityId = "130010"
+
+    val contents = Transformations.map(weatherInfo) {
+        it.toString()
     }
 
-    private fun fetchWeatherInfo() = viewModelScope.launch {
+    fun onCreate(cityId: String) {
+        this.cityId = cityId
+        fetchWeatherInfo(cityId)
+    }
+
+    private fun fetchWeatherInfo(cityId: String) = viewModelScope.launch {
         try {
-            val result = weatherRepository.fetchWeatherInfo()
+            val result = weatherRepository.fetchWeatherInfo(cityId)
             _weatherInfo.value = result
         } catch (throwable: Throwable) {
-            _errorHandler.postValue(Unit)
+            _errorHandler.value = Unit
         }
     }
 }
