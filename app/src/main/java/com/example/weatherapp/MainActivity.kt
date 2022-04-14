@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             it.viewModel = viewModel
         }
 
-        viewModel.onCreate(getString(R.string.area_id_tokyo))
+        viewModel.onCreate()
 
         viewModel.weatherInfo.observe(this) {
             Snackbar.make(binding.root, "success", Snackbar.LENGTH_SHORT).show()

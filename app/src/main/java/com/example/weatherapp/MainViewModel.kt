@@ -10,6 +10,11 @@ import com.example.weatherapp.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+    enum class CITY(val cityId: String) {
+        TOKYO("130010"),
+        OTSU("250010")
+    }
+
     private val weatherRepository = WeatherRepository()
 
     private val _errorHandler = MutableLiveData<Unit>()
@@ -18,14 +23,13 @@ class MainViewModel : ViewModel() {
     private val _weatherInfo = MutableLiveData<List<WeatherModel?>>()
     val weatherInfo: LiveData<List<WeatherModel?>> = _weatherInfo
 
-    private var cityId = "130010"
+    private var cityId = CITY.TOKYO.cityId
 
     val contents = Transformations.map(weatherInfo) {
         it.toString()
     }
 
-    fun onCreate(cityId: String) {
-        this.cityId = cityId
+    fun onCreate() {
         fetchWeatherInfo(cityId)
     }
 

@@ -29,7 +29,7 @@ class WeatherRepository {
                 }
             })
             // TODO: これは良く無い
-            delay(300)
+            delay(500)
             return@withContext dataList
         } catch (t: Throwable) {
             return@withContext emptyList<WeatherModel>()
