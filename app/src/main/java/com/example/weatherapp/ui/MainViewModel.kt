@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,15 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.model.WeatherModel
 import com.example.weatherapp.repository.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val weatherRepository: WeatherRepository
+) : ViewModel() {
     enum class CITY(val cityId: String) {
         TOKYO("130010"),
         OTSU("250010")
     }
-
-    private val weatherRepository = WeatherRepository()
 
     private val _errorHandler = MutableLiveData<Unit>()
     val errorHandler: LiveData<Unit> = _errorHandler

@@ -1,18 +1,20 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: これは良く無い
-        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        val viewModel: MainViewModel by viewModels()
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
             this,
