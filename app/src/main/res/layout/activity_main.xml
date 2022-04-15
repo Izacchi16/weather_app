@@ -43,6 +43,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:text="@string/change_area"
+                    android:onClick="@{()->viewModel.changeCity()}"
                     android:layout_marginVertical="8dp"
                     android:layout_marginHorizontal="32dp"
                     app:layout_constraintTop_toTopOf="parent"

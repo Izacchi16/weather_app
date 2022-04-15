@@ -33,15 +33,33 @@ class MainViewModel @Inject constructor(
     }
 
     fun onCreate() {
-        fetchWeatherInfo(cityId)
+        fetchWeatherInfo()
     }
 
-    private fun fetchWeatherInfo(cityId: String) = viewModelScope.launch {
+    private fun fetchWeatherInfo() = viewModelScope.launch {
         try {
+            cityId = weatherRepository.getCityId()
+
+            if (cityId.isEmpty()) {
+                cityId = CITY.TOKYO.cityId
+            }
+
             val result = weatherRepository.fetchWeatherInfo(cityId)
             _weatherInfo.value = result
         } catch (throwable: Throwable) {
             _errorHandler.value = Unit
         }
+    }
+
+    fun changeCity() = viewModelScope.launch {
+        when (cityId) {
+            CITY.TOKYO.cityId -> {
+                weatherRepository.setCityId(CITY.OTSU.cityId)
+            }
+            CITY.OTSU.cityId -> {
+                weatherRepository.setCityId(CITY.TOKYO.cityId)
+            }
+        }
+        fetchWeatherInfo()
     }
 }

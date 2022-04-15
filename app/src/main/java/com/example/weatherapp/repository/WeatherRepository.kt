@@ -2,16 +2,20 @@ package com.example.weatherapp.repository
 
 import com.example.weatherapp.api.ApiClient
 import com.example.weatherapp.model.WeatherModel
+import com.example.weatherapp.preference.PreferenceStorage
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class WeatherRepository @Inject constructor(
-    private val apiClient: ApiClient
+    private val apiClient: ApiClient,
+    private val preferenceStorage: PreferenceStorage
 ) {
 
     suspend fun fetchWeatherInfo(cityId: String): List<WeatherModel> = withContext(Dispatchers.IO) {
@@ -37,5 +41,13 @@ class WeatherRepository @Inject constructor(
         } catch (t: Throwable) {
             return@withContext emptyList<WeatherModel>()
         }
+    }
+
+    suspend fun getCityId(): String {
+        return preferenceStorage.getCityId().first()
+    }
+
+    suspend fun setCityId(cityId: String) {
+        preferenceStorage.updateCityId(cityId)
     }
 }
