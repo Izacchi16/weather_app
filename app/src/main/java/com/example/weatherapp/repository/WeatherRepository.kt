@@ -3,15 +3,14 @@ package com.example.weatherapp.repository
 import com.example.weatherapp.api.ApiClient
 import com.example.weatherapp.model.WeatherModel
 import com.example.weatherapp.preference.PreferenceStorage
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(
     private val apiClient: ApiClient,

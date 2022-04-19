@@ -5,7 +5,6 @@ import android.content.Context
 import com.example.weatherapp.api.ApiClient
 import com.example.weatherapp.preference.PreferenceStorage
 import com.example.weatherapp.repository.WeatherRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

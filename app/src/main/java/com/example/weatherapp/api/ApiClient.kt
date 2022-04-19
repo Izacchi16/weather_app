@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class ApiClient @Inject constructor(){
+class ApiClient @Inject constructor() {
     // Clientを作成
     private val httpBuilder: OkHttpClient.Builder
         get() {
